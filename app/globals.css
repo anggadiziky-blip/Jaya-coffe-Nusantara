@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/* Brand Guidelines v1.0, 03 Visual system */
+@theme {
+  --color-ivory: #f6f1e8;      /* Warm Ivory: primary background */
+  --color-ivory-deep: #ede5d8; /* tint of Warm Ivory for alternating sections */
+  --color-sand: #e2d7c6;
+  --color-espresso: #352218;   /* Espresso Brown: logo, headlines, corporate elements */
+  --color-espresso-deep: #2a1a12;
+  --color-tan: #96704e;        /* Origin Tan: rules, labels, small highlights */
+  --color-stone: #77766d;      /* Stone Grey: metadata, technical information */
+  --color-stone-dark: #5c5b53; /* Stone Grey darkened for small text on ivory (contrast) */
+  --color-line: rgb(53 34 24 / 0.14);
+
+  --font-serif: var(--font-display), "Times New Roman", serif;
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-mono: var(--font-data), ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-ivory font-sans text-espresso;
+  }
+  ::selection {
+    background: var(--color-tan);
+    color: var(--color-ivory);
+  }
+  :focus-visible {
+    outline: 1px solid var(--color-tan);
+    outline-offset: 3px;
+  }
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@utility container-x {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 1440px;
+  padding-inline: 1.25rem;
+  @media (width >= 768px) {
+    padding-inline: 2.5rem;
+  }
+  @media (width >= 1280px) {
+    padding-inline: 4rem;
+  }
+}
+
+/* Short all-caps label, preceded by an Origin Tan rule */
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  &::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: var(--color-tan);
+  }
+}
+
+@utility label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s var(--ease-out-expo);
+  &:hover {
+    background-size: 100% 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
